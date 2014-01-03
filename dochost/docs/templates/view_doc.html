@@ -22,6 +22,9 @@
                 {{ titleForm.csrf_token }}
                 <div class='form-group'>
                     <label for='documentName'>Edit Name:</label>
+                    {% for error in titleForm.errors.name %}
+                        <span class="label label-danger">{{ error }}</span>
+                    {% endfor %}
                     {{ titleForm.name(type='text', id='nameField', class='form-control', placeholder=doc.name) }}
                     <br>
                     <button type='submit' class='btn btn-success'>Submit</button>
@@ -39,9 +42,15 @@
                 {{ fileForm.csrf_token }}
                 <div class='form-group'>
                     <label for='commentField'>Comment for this new version (required):</label>
+                    {% for error in fileForm.errors.name %}
+                        <span class="label label-danger">{{ error }}</span>
+                    {% endfor %}
                     {{ fileForm.comment(type='text', id='commentField', class='form-control', placeholder='Added new chapter...') }}
                 </div>
                 <div class='form-group'>
+                    {% for error in fileForm.errors.name %}
+                        <span class="label label-danger">{{ error }}</span>
+                    {% endfor %}
                     {{ fileForm.uploaded(id='fileField') }}
                     <p class="help-block">Supports .doc, .docx, and .pdf files.</p>
                 </div>
