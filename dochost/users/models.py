@@ -6,6 +6,7 @@ import string
 
 
 class User(db.Model):
+    """Basic user model with associated roles and documents."""
     __tablename__ = 'user'
     uid = db.Column(db.Integer, primary_key = True)
     firstname = db.Column(db.String(100))
@@ -61,6 +62,7 @@ class User(db.Model):
 
 
 class InviteCode(db.Model):
+    """Model with code and available fields for invite codes. """
     __tablename__ = 'invite_codes'
     uid = db.Column(db.Integer, primary_key=True)
     code = db.Column(db.String(33), unique=True)

@@ -15,6 +15,7 @@ def root():
 
 @users.route('/login', methods=['GET', 'POST'])
 def login():
+    """Standard login view, checks existence of username and for password validity."""
     form = LoginForm()
     logged_in = session.get('logged_in')
     if logged_in:
@@ -42,6 +43,7 @@ def login():
 @users.route('/logout', methods=['GET'])
 @login_required
 def logout():
+    """Logs out a user."""
     logout_user()
     session['logged_in'] = False
     flash('You have been logged out.', 'info')
@@ -50,6 +52,7 @@ def logout():
 
 @users.route('/register', methods=['GET', 'POST'])
 def register():
+    """Registers a user if the email, username and invite code are valid."""
     logged_in = session.get('logged_in')
     if logged_in:
         flash('You already have an account.', 'info')
@@ -81,6 +84,7 @@ def register():
 @users.route('/profile')
 @login_required
 def profile():
+    """Displays a users's documents and profile information, as well as available invite codes if user is admin."""
     codes = None
     if current_user.has_role('admin'):
         codes = InviteCode.query.filter_by(available=True).all()

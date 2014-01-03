@@ -4,12 +4,14 @@ from wtforms.validators import DataRequired, Length, EqualTo
 
 
 class LoginForm(Form):
+    """Form with generic login fields."""
     email = TextField('email', validators=[DataRequired()])
     password = PasswordField('password', validators=[DataRequired()])
     remember_me = BooleanField('remember_me', default=False)
 
 
 class RegisterForm(Form):
+    """Form with generic register fields, as well as Recaptcha and an invite code field."""
     firstname = TextField('firstname', validators=[DataRequired(), Length(min=1, max=32)])
     lastname = TextField('lastname', validators=[DataRequired(), Length(min=1, max=32)])
     username = TextField('username', validators=[DataRequired(), Length(min=1, max=32)])

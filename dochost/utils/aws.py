@@ -13,11 +13,13 @@ import string
 def get_bucket(access_key_id=app.config['AWS_ACCESS_KEY'],
                secret=app.config['AWS_SECRET_KEY'],
                bucket_name=app.config['BUCKET_NAME']):
+    """Returns a boto Bucket object."""
     conn = boto.connect_s3(access_key_id, secret)
     return conn.get_bucket(bucket_name)
 
 
 def delete_s3_files(filenames):
+    """Deletes every key in a bucket with the respective filename."""
     bucket = get_bucket()
     for filename in filenames:
         key = bucket.get_key(filename)
@@ -25,6 +27,7 @@ def delete_s3_files(filenames):
 
 
 def upload_to_s3(file_obj, filename=None):
+    """Uploads the file_obj to an Amazon S3 bucket under filename if specified."""
     if not filename:
         filename = werkzeug.secure_filename(file_obj.filename)
     randstr = None
@@ -42,14 +45,17 @@ def upload_to_s3(file_obj, filename=None):
 
 
 def make_s3_path(filename):
+    """Creates a string combining the standard S3 URL and a filename to make a valid link."""
     return urljoin('http://s3.amazonaws.com/{0}/'.format(app.config['BUCKET_NAME']), filename)
 
 
 def gen_rand_string(length):
+    """Generates a psuedo-random lower-case alphanumeric string."""
     return ''.join(random.choice(string.ascii_uppercase + string.digits) for x in range(length)).lower()
 
 
 def upload_thumbnail(uuid):
+    """Uploads the thumbnail of uuid to the Amazon S3 bucket."""
     bucket = get_bucket()
     key = bucket.new_key("{0}.png".format(uuid))
     key.set_metadata('Content-Type', 'image/png')
@@ -58,4 +64,5 @@ def upload_thumbnail(uuid):
 
 
 def doc_has_file_twin(s3path):
+    """Determines if another Document with that s3path exists."""
     return int(Document.query.filter_by(s3path=s3path).count()) > 1

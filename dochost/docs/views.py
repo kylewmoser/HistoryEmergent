@@ -20,6 +20,7 @@ def root():
 @docs.route('/upload', methods=['GET', 'POST'])
 @login_required
 def upload():
+    """Display upload template, and upload document if form submitted."""
     form = DocumentForm()
     if form.validate_on_submit():
         file_obj = form.uploaded.data
@@ -42,6 +43,7 @@ def upload():
 @docs.route('/all')
 @login_required
 def view_all():
+    """View all uploaded documents in a grid layout."""
     documents = current_user.documents
     for doc in docs:
         if not doc.thumbnail:
@@ -56,6 +58,7 @@ def view_all():
 @docs.route('/view/<int:doc_id>', methods=['GET', 'POST'])
 @login_required
 def view_doc(doc_id):
+    """View a specific document with Crocodoc, or edit the title."""
     doc = Document.query.get(doc_id)
     if current_user == doc.user:
         title_form = EditDocumentForm()
@@ -76,6 +79,7 @@ def view_doc(doc_id):
 @docs.route('/update/<int:doc_id>', methods=['POST'])
 @login_required
 def update_doc(doc_id):
+    """Upload a new version of a document."""
     doc = Document.query.get(doc_id)
     form = UpdateDocumentForm()
     if form.validate_on_submit():
@@ -98,6 +102,7 @@ def update_doc(doc_id):
 @docs.route('/delete/<int:doc_id>')
 @login_required
 def delete_doc(doc_id):
+    """Delete a document and all its versions from database, Crocodoc and Amazon S3."""
     doc = Document.query.get(doc_id)
     if current_user != doc.user:
         flash("You don't have permission to delete this file.", "error")

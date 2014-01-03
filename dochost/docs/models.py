@@ -6,6 +6,7 @@ from dochost.utils import croc
 
 
 class Document(db.Model):
+    """Basic Document model with Amazon S3 path, thumbnail, Crocodoc session and UUID information."""
     __tablename__ = 'document'
     uid = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(80))
@@ -54,6 +55,7 @@ class Document(db.Model):
 
 
 class Version(db.Model):
+    """A model to provide references to the different versions of a Document."""
     __tablename__ = 'version'
     uid = db.Column(db.Integer, primary_key=True)
     comment = db.Column(db.String(300))

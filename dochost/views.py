@@ -8,6 +8,7 @@ from crocodoc import CrocodocError
 
 @app.route('/')
 def home():
+    """Home page view for anonymous and logged-in users."""
     logged_in = session.get('logged_in')
     if logged_in:
         docs = get_all(Document)
