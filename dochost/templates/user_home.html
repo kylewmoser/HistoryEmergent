@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='row'>
+    <div class='col-lg-12'>
+        <div class="page-header">
+            <h2>Welcome back, {{user.firstname}}</h2>
+        </div>
+    </div>
+</div>
+
+<div class='row'>
+    <div class='col-lg-3'>
+        <div class='well'>
+            <h4>Contribute a Story</h4>
+            <a href="{{ url_for('docs.upload') }}" role='button' class="btn btn-lg btn-success">Upload Story</a>
+        </div>
+    </div>
+</div>
+<hr>
+
+<div class='row'>
+    <div class='col-lg-12'>
+        <h2>Recent Contributions:</h2>
+        {% for doc in docs|sort(attribute='created_at') %}
+            <div class='col-lg-3'>
+                <div class='thumbnail'>
+                    {% if doc.thumbnail %}
+                        <a href="{{ url_for('docs.view_doc', doc_id=doc.uid) }}"><img src="{{ doc.thumbnail }}" class='img-responsive' style="max-width: 200px;"></a>
+                    {% endif %}
+                    <div class='caption'>
+                        <h3><a href="{{ url_for('docs.view_doc', doc_id=doc.uid) }}">{{ doc.name }}</a></h3>
+                        <h3><small>{{ doc.user.firstname }}  {{ doc.user.lastname }}</small></h3>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

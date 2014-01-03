@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class='row'>
+    <div class='col-lg-4'>
+        <div class="page-header">
+            <h1>Account Info <small>{{user.username}}</small></h1>
+        </div>
+    </div>
+</div>
+<div class='row'>
+    <div class='col-lg-4'>
+        <dl class='dl-horizontal'>
+            <dt>Name:</dt>
+                <dd>{{user.firstname}} {{user.lastname}}</dd>
+            <dt>Username:</dt>
+                <dd>{{user.username}}</dd>
+            <dt>Email Address:</dt>
+                <dd>{{user.email}}</dd>
+        </dl>
+    </div>
+</div>
+
+{% if docs %}
+<div class='row'>
+    <div class='col-lg-8'>
+        <h2>Your Contributions:</h2>
+        <table class='table table-striped table-bordered table-hover table-condensed'>
+            <tr>
+                <th>Name</th>
+                <th>Format</th>
+                <th>Created: (UTC)</th>
+                <th>Actions</th>
+            </tr>
+            {% for doc in docs %}
+                <tr>
+                    <td><a href="{{ url_for('docs.view_doc', doc_id=doc.uid) }}">{{ doc.name }}</a></td>
+                    <td>{{ doc.format }}</td>
+                    <td>{{ doc.created_at.strftime('%a %b %d @ %I:%M %p') }}</td>
+                    <td><a class='btn btn-danger' role='button' href="{{ url_for('docs.delete_doc', doc_id=doc.uid) }}">Delete</a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+</div>
+{% endif %}
+
+{% if codes %}
+<div class='row'>
+    <h3>Available Invite Codes</h3>
+    <div class='col-lg-6'>
+        {% for code in codes %}
+        <ul>
+            <li>{{ code.code }}</li>
+        </ul>
+        {% endfor %}
+    </div>
+</div>
+{% endif %}
+
+{% endblock %}

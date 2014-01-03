@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block custom_load %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
+
+{% block no_container %}
+<div class="header-image">
+    <div class="headline">
+        <div class="container">
+            <h1>History Emergent</h1>
+            <h2>Help us write a story about the future of Human existence.</h2>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <hr>
+    <div class='row' id="howitworks">
+        <h1>How It Works:</h1>
+        <h3>We are currently creating a record of noteworthy events in the future to serve as canon on which contributors
+            can base their stories.</h3>
+        <h3>These will consist of:</h3>
+        <ul id='event-list'>
+            <li>Global Events</li>
+            <li>Natural Disasters</li>
+            <li>Cultural Movements</li>
+            <li>Technological Advances</li>
+            <li>And more...</li>
+        </ul>
+    </div>
+    
+    <!-- START THE FEATURETTES -->
+    <hr class="featurette-divider">
+    <div class='row'>
+      <h1 class='text-center'>There will also be three distinct periods of significance:</h1>
+      <br>
+      <br>
+      <br>
+    </div>
+  
+    <div class='row'>
+      <div class="featurette" id="about">
+              <img class="featurette-image img-rounded img-responsive pull-right" src="http://i.imgur.com/ywhjtHh.jpg" id='pre-war-img'>
+          <h2 class="featurette-heading">Pre-War <span class="text-muted"> (2020-2142)</span></h2>
+          <p class="lead">What do people believe in if not their history or religion?</p>
+          <p class="lead">Seventy percent of the population believes in nothing. Religions are forgotten from lack of interest. History is manipulated and new systems of belief are born from and corporate interests. True history becomes a religion all its own.</p>
+          <p class="lead">The world is saturated to the point where few new accomplishments have meaning. It's all been done. </p>
+          <p class="lead">Overpopulation leads to its inescapable conclusion. Education and wealth inequality skyrocket. Knowledge becomes the most valuable resource.</p>      
+          <p class="lead">Apathy erodes the human spirit.</p>      
+          <p class="lead">But as it is said, a power can only rule so long as it doesn't take everything away. This includes conflict. Without at least the illusion of conflict we are without identity. When deprived of identity, an anger will rise and swell and overcome all obstacles.</p>      
+      </div>
+    </div>
+    
+    <hr class="featurette-divider">
+    
+    <div class="featurette" id="services">
+        <img class="featurette-image img-rounded img-responsive pull-left" id='ww3-img' src="http://i.imgur.com/Z9wyL9A.jpg">
+        <h2 class="featurette-heading">WWIII <span class="text-muted">(2142-2150)</span></h2>
+        <p class="lead">The war lasts many years. It is a war that rivals the Peloponnesian and Grecian wars in essence.</p>
+        <p class="lead">A war that last until it is forgotten why the war began.</p>
+        <p class="lead">The spectre of biological warfare and chemical weapons returns, and from it, a new disease emerges amongst the boundless fighting. A disease so cruel it necessitates a global reboot.</p>  
+    </div>
+    
+    <hr class="featurette-divider">
+    
+    <div class="featurette" id="contact">
+        <img class="featurette-image img-rounded img-responsive pull-right" id='new-world-img' src="http://i.imgur.com/2RUmvee.jpg">
+        <h2 class="featurette-heading">Post War <span class="text-muted">(2150-3000)</span></h2>
+        <p class="lead">Decades after the war, civilization rises...</p>
+    </div>
+    
+    <!-- /END THE FEATURETTES -->
+    
+    <hr>
+    
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            Copyright &copy; History Emergent 2013 &middot; Facebook &middot; Twitter &middot; Google+
+        </p>
+    </footer>
+    <!-- /END OF FOOTER -->
+    
+</div><!-- /container -->
+{% endblock %}

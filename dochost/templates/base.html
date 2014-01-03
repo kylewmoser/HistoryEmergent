@@ -1,0 +1,104 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% if title %}
+      <title>{{ title }}</title>
+    {% else %}
+      <title>History Emergent - A collaborative chronicle of the future of Earth.</title>
+    {% endif %}
+    <style>
+        body {margin-top: 60px;}
+    </style>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/bootstrap.min.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/base.css') }}">
+    {% block custom_load %} {% endblock %}
+</head>
+    
+<body>
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+        <div class='container'>
+            <div class='navbar-header'>
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class='navbar-brand' href="{{ url_for('home') }}">History Emergent</a>
+            </div>
+            <div class='collapse navbar-collapse navbar-ex1-collapse'>
+                <ul class='nav navbar-nav navbar-right'>
+                    {% if not session.logged_in %}
+                        <li><a href="{{ url_for('users.register') }}">Sign Up</a></li>
+                        <li><a href="{{ url_for('users.login') }}">Sign In</a></li>
+                    {% else %}
+                        <li><a href="{{ url_for('docs.upload') }}">Upload</a></li>
+                        <li><a href="{{ url_for('users.profile') }}">Profile</a></li>
+                        <li><a href="{{ url_for('users.logout') }}">Sign Out</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class='container'>
+        <div class="row">
+            <div class="col-lg-12">
+              {% with info_msgs = get_flashed_messages(category_filter=["info"]) %}
+                {% if info_msgs  %}
+                    <ul>
+                  {% for info_msg in info_msgs  %}
+                      <div class="alert alert-info alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <p>{{ info_msg }}</p>
+                      </div>
+                    </ul>
+                  {% endfor %}
+                {% endif  %}
+              {% endwith  %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              {% with success_msgs = get_flashed_messages(category_filter=["success"]) %}
+                {% if success_msgs  %}
+                    <ul>
+                  {% for success_msg in success_msgs  %}
+                      <div class="alert alert-success alert-dismissable">
+                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                        <p>{{ success_msg }}</p>
+                      </div>
+                    </ul>
+                  {% endfor %}
+                {% endif  %}
+              {% endwith  %}
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-12">
+              {% with error_msgs = get_flashed_messages(category_filter=["error"]) %}
+                {% if error_msgs  %}
+                    <ul>
+                  {% for error_msg in error_msgs  %}
+                      <div class="alert alert-danger">
+                        <p>{{ error_msg }}</p>
+                      </div>
+                    </ul>
+                  {% endfor %}
+                {% endif  %}
+              {% endwith  %}
+            </div>
+          </div>
+        {% block content %} {% endblock %}
+    </div>
+    {% block no_container %} {% endblock %}
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/glyphicons-halflings-regular.eot') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/glyphicons-halflings-regular.svg') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/glyphicons-halflings-regular.ttf') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='fonts/glyphicons-halflings-regular.woff') }}">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    {% block extra_js %} {% endblock %}
+</body>
+</html>

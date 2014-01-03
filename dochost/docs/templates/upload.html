@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block custom_load %}
+{% endblock %}
+
+{% block content %}
+
+<div class='row'>
+    <h1>Upload your contribution below:</h1>
+    <div class='col-lg-4'>
+        <form role='form' method='post' enctype='multipart/form-data' action=''>
+            {{ form.csrf_token }}
+
+            <div class='form-group'>
+                <label for='documentName'>Title of your contribution:</label>
+                {% for error in form.errors.name %}
+                    <span class="label label-danger">{{ error }}</span>
+                {% endfor %}
+                {{ form.name(type='text', id='nameField', class='form-control', placeholder='Example Title') }}
+            </div>
+
+            <div class='form-group'>
+                <label for='format'>Type of contribution:</label>
+                <select class='form-control input-sm' name='format'>
+                    <option value='Document'>Document</option>
+                </select>
+            </div>
+
+            <div class='form-group'>
+                {{ form.uploaded(id='fileField') }}
+                <p class="help-block">Supports .doc, .docx, and .pdf files.</p>
+            </div>
+            <button type='submit' class='btn btn-lg btn-success'><span class='glyphicon glyphicon-cloud-upload'> Upload</span></button>
+        </form>
+    </div>
+</div>
+{% endblock %}

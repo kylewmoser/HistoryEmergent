@@ -1,0 +1,115 @@
+{% extends 'base.html' %}
+
+{% block custom_load %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('users.static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script type='text/javascript' src="{{ url_for('users.static', filename='js/register.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class='container' id='narrow-container'>
+    <h3>Sign Up for a History Emergent Account</h3>
+    <p class='text-info'>Invite Code Required for Beta Access</p>
+    <form class="form-horizontal" role="form" action='' method='post'>
+        {{ form.csrf_token }}
+        
+        <div class="form-group">
+            <label for="inputFirstName" class="col-lg-2 control-label">First Name:</label>
+            {% for error in form.errors.firstname %}
+                <span class="label label-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="col-lg-10">
+                {{ form.firstname(type='text', id='firstNameField', class='form-control input-md',
+                            placeholder='Rick') }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputLastName" class="col-lg-2 control-label">Last Name:</label>
+            {% for error in form.errors.lastname %}
+                <span class="label label-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="col-lg-10">
+                {{ form.lastname(type='text', id='lastNameField', class='form-control input-md',
+                            placeholder='Deckard') }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputUsername" class="col-lg-2 control-label">Username:</label>
+            {% for error in form.errors.username %}
+                <span class="label label-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="col-lg-10">
+                {{ form.username(type='text', id='usernameField', class='form-control input-md',
+                            placeholder='rdeckard') }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputEmail" class="col-lg-2 control-label">Email:</label>
+            {% for error in form.errors.email %}
+                <span class="label label-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="col-lg-10">
+                {{ form.email(type='email', id='emailField', class='form-control input-md',
+                            placeholder='Email') }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="inputPassword1" class="col-lg-2 control-label">Password:</label>
+            {% for error in form.errors.password %}
+                <span class="label label-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="col-lg-10">
+                {{ form.password(type='password', id='passwordField', class='form-control input-md',
+                            placeholder='Password') }}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label for="confirmPassword" class="col-lg-2 control-label">Confirm Password:</label>
+            {% for error in form.errors.confirm %}
+                <span class="label label-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="col-lg-10">
+                {{ form.confirm(type='password', id='passwordField', class='form-control input-md',
+                            placeholder='Confirm Password') }}
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="inviteCode" class="col-lg-2 control-label">Invite Code:</label>
+            {% for error in form.errors.invite %}
+                <span class="label label-danger">{{ error }}</span>
+            {% endfor %}
+            <div class="col-lg-10">
+                {{ form.invite(type='text', id='inviteField', class='form-control input-md',
+                            placeholder='Invite Code') }}
+            </div>
+        </div>
+        
+        <div class='form-group'>
+            {% if form.recaptcha.errors %}
+                <div class="alert alert-danger">
+                    <h4>Captcha Errors:</h4>
+                    {% for error in form.recaptcha.errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    
+        {{ form.recaptcha }}
+        
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button type="submit" id="registerButton" data-loading-text="Processing..." class="btn btn-default">Sign Up</button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

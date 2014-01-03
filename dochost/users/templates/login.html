@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block custom_load %}
+<link rel="stylesheet" type="text/css" href="{{ url_for('users.static', filename='css/login.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script type='text/javascript' src="{{ url_for('users.static', filename='js/signin.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+<div class='container' id='narrow-container'>
+    <form class="form-horizontal" id="loginForm" role="form" action='' method='post'>
+        {{ form.csrf_token }}
+        <div class="form-group">
+            <label for="inputEmail1" class="col-lg-2 control-label">Email:</label>
+            <div class="col-lg-10">
+                {{ form.email(type='email', id='emailField', class='form-control input-md',
+                            placeholder='Email') }}
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword1" class="col-lg-2 control-label">Password:</label>
+            <div class="col-lg-10">
+                {{ form.password(type='password', id='passwordField', class='form-control input-md',
+                            placeholder='Password') }}
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <div class="checkbox">
+                    <label>Remember Me
+                        {{ form.remember_me(type='checkbox', id='rememberField') }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-lg-offset-2 col-lg-10">
+                <button type="submit" id="signinButton" data-loading-text="Signing in..." class="btn btn-default">Sign in</button>
+                {% for error in form.errors.number %}
+                    <span class="label label-danger">{{ error }}</span>
+                {% endfor %}
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

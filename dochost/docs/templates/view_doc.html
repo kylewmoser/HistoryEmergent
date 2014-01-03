@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% if titleForm %}
+    <div id="showPanel" >
+        <button type='button' id="showButton" class='btn btn-default'>Show Panel</button>
+        <br>
+        <br>
+    </div>
+    <div class='row' id='actionPanel'>
+        <h3>{{ doc.name }}
+            <button type='button' id='editButton' class='btn btn-primary'>Edit Title</button>
+            <button type='button' id="fileFormButton" class='btn btn-primary'>Upload New Version</button>
+            <button type='button' id="hideButton" class='btn btn-default'>Hide Panel</button>
+        </h3> 
+    </div>
+
+    <div class='row' id='editForm'>
+        <div class='col-lg-4'>
+            <form role='form' method='post' action=''>
+                {{ titleForm.csrf_token }}
+                <div class='form-group'>
+                    <label for='documentName'>Edit Name:</label>
+                    {{ titleForm.name(type='text', id='nameField', class='form-control', placeholder=doc.name) }}
+                    <br>
+                    <button type='submit' class='btn btn-success'>Submit</button>
+                    <button type='button' id="hideFormButton" class='btn btn-danger'>Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {% if fileForm %}
+    <div class='row' id='fileForm'>
+        <h3>Upload new version:</h3>
+        <div class='col-lg-4'>
+            <form role='form' method='post' enctype='multipart/form-data' action="{{ url_for('docs.update_doc', doc_id=doc.uid) }}">
+                {{ fileForm.csrf_token }}
+                <div class='form-group'>
+                    <label for='commentField'>Comment for this new version (required):</label>
+                    {{ fileForm.comment(type='text', id='commentField', class='form-control', placeholder='Added new chapter...') }}
+                </div>
+                <div class='form-group'>
+                    {{ fileForm.uploaded(id='fileField') }}
+                    <p class="help-block">Supports .doc, .docx, and .pdf files.</p>
+                </div>
+                <button type='submit' class='btn btn-lg btn-success'><span class='glyphicon glyphicon-cloud-upload'> Upload</span></button>
+                <button type='button' id="hideFileFormButton" class='btn btn-danger'>Cancel</button>
+            </form>
+        </div>
+    </div>
+    {% endif %}
+{% else %}
+<h3>{{ doc.name }}</h3>
+{% endif %}
+
+<iframe src="{{viewer_url}}" style="width:100%; height:85%;" frameborder="0"></iframe>
+{% endblock %}
+
+{% block extra_js %}
+{% if titleForm %}
+    <script type="text/javascript" src="{{ url_for('docs.static', filename='js/panels.js') }}"></script>
+{% endif %}
+{% endblock %}
