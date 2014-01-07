@@ -1,4 +1,4 @@
-from dochost.users.models import User, InviteCode
+from historyemergent.users.models import User, InviteCode
 
 
 def get_id_from_email(email):

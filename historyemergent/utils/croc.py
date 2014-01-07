@@ -1,5 +1,5 @@
 import crocodoc
-from dochost import app
+from historyemergent import app
 
 crocodoc.api_token = app.config['CROC_API_TOKEN']
 

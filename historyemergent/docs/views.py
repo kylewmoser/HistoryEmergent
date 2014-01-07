@@ -1,15 +1,15 @@
-from dochost.docs.forms import DocumentForm, EditDocumentForm, UpdateDocumentForm
+from historyemergent.docs.forms import DocumentForm, EditDocumentForm, UpdateDocumentForm
 from flask import redirect, url_for, flash, render_template, request
-from dochost.utils.aws import upload_to_s3, make_s3_path, delete_s3_files, doc_has_file_twin
+from historyemergent.utils.aws import upload_to_s3, make_s3_path, delete_s3_files, doc_has_file_twin
 from flask.ext.login import current_user, login_required
-from dochost.docs.models import Document, Version
-from dochost.utils.general import add_model
-from dochost import db, app
-from dochost.utils import croc
+from historyemergent.docs.models import Document, Version
+from historyemergent.utils.general import add_model
+from historyemergent import db, app
+from historyemergent.utils import croc
 from crocodoc import CrocodocError
-from dochost.docs import docs
+from historyemergent.docs import docs
 import werkzeug
-from dochost.utils.general import insert_in_filename
+from historyemergent.utils.general import insert_in_filename
 
 
 @docs.route('/')

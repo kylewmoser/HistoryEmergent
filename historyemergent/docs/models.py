@@ -1,8 +1,8 @@
 from flask.ext.sqlalchemy import SQLAlchemy
 from datetime import datetime
-from dochost import db, app
+from historyemergent import db, app
 from urlparse import urljoin
-from dochost.utils import croc
+from historyemergent.utils import croc
 
 
 class Document(db.Model):
@@ -35,7 +35,7 @@ class Document(db.Model):
         self.last_modified = datetime.utcnow()
 
     def set_thumbnail(self, uuid=None):
-        from dochost.utils import aws
+        from historyemergent.utils import aws
         if not uuid:
             uuid = self.uuid
         aws.upload_thumbnail(uuid)

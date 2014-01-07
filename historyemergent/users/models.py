@@ -1,5 +1,5 @@
 from flask.ext.sqlalchemy import SQLAlchemy
-from dochost import db, bcrypt
+from historyemergent import db, bcrypt
 from datetime import datetime
 import random
 import string

@@ -1,8 +1,8 @@
 import werkzeug
 from urlparse import urljoin
-from dochost.utils.general import insert_in_filename
-from dochost.docs.models import Document
-from dochost import app
+from historyemergent.utils.general import insert_in_filename
+from historyemergent.docs.models import Document
+from historyemergent import app
 import croc
 import boto
 import mimetypes

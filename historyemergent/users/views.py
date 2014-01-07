@@ -1,11 +1,11 @@
 from flask.ext.login import login_user, logout_user, login_required, current_user
-from dochost.users.utils import get_id_from_email, check_username_and_email
+from historyemergent.users.utils import get_id_from_email, check_username_and_email
 from flask import redirect, url_for, flash, session, render_template
-from dochost.users.forms import LoginForm, RegisterForm
-from dochost.users.models import User, InviteCode
-from dochost.utils.general import add_model
-from dochost import db, login_manager
-from dochost.users import users
+from historyemergent.users.forms import LoginForm, RegisterForm
+from historyemergent.users.models import User, InviteCode
+from historyemergent.utils.general import add_model
+from historyemergent import db, login_manager
+from historyemergent.users import users
 
 
 @users.route('/')

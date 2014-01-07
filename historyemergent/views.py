@@ -1,8 +1,8 @@
 from flask.ext.login import login_required, current_user
 from flask import render_template, session
-from dochost.docs.models import Document
-from dochost.utils.general import get_all, add_model
-from dochost import app, db
+from historyemergent.docs.models import Document
+from historyemergent.utils.general import get_all, add_model
+from historyemergent import app, db
 from crocodoc import CrocodocError
 
 
