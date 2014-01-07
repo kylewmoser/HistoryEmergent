@@ -31,7 +31,7 @@ def login():
         user = load_user(uid)
         if not user.check_password(form.password.data):
             flash('Wrong password for {email}.'.format(email=form.email.data), "error")
-            return redirect(url_for('login'))
+            return redirect(url_for('users.login'))
 
         login_user(user)
         session['logged_in'] = True
@@ -63,7 +63,7 @@ def register():
         code = InviteCode.query.filter_by(code=form.invite.data).first()
         if not code or not code.check_code():
             flash('Invalid code.', 'error')
-            return redirect(url_for('register'))
+            return redirect(url_for('users.register'))
 
         code.redeem_code()
         db.session.add(code)
@@ -71,7 +71,7 @@ def register():
 
         if not valid:
             flash(message, "error")
-            return redirect(url_for('login'))
+            return redirect(url_for('users.login'))
         user = User(form.firstname.data, form.lastname.data, form.username.data,
                     form.email.data, form.password.data)
         
