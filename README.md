@@ -1,7 +1,7 @@
-DocHost
+History Emergent
 -------
 
-**DocHost** is a generic application for hosting and viewing documents. It currently supports viewing and annotating documents with the following file extensions:
+This is the web application to facilitate the development of History Emergent, a collaborative project to create a chronicle of the future of Earth. It currently supports viewing and annotating documents with the following file extensions:
 
  - .PDF
  - .DOC
@@ -10,7 +10,7 @@ DocHost
 Quickstart
 ----------
 
-Before running DocHost, you'll need:
+Before running History Emergent, you'll need:
 
  - An [**Amazon Web Services**][1] account (credit card required)
  - A [**Crocodoc**][2] account (no billing method required, the evaluation mode is sufficient)
@@ -22,7 +22,7 @@ To get started, clone this repo:
     git clone https://github.com/scascketta/DocHost.git
 
 
-DocHost uses the `app.config` dictionary in Flask for configuration details. To keep things neat, `app.config` loads those details from the `config.py` file. 
+History Emergent uses the `app.config` dictionary in Flask for configuration details. To keep things neat, `app.config` loads those details from the `config.py` file. 
 
 Add the following values to their appropriate variable in `config.py` :
 
