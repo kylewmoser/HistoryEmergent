@@ -3,11 +3,14 @@ from flask.ext.sqlalchemy import SQLAlchemy
 from flask.ext.login import LoginManager
 from flask.ext.bcrypt import Bcrypt
 import logging
+from logging.handlers import SMTPHandler
 import os
 import time
 
 app = Flask(__name__)
+app.config.from_object('config')
 
+# File handler for logging
 if not os.path.exists(os.path.join(os.getcwd(), 'errors')):
     os.mkdir('errors')
 fmt = logging.Formatter('\n\n%(asctime)s:%(levelname)s - %(module)s:%(funcName)s - %(message)s\n\n',
@@ -16,9 +19,19 @@ fh = logging.FileHandler(os.path.join(os.getcwd(),
                          "errors/{0}.log".format(time.strftime("%m-%d-%g@%H:%M"))))
 fh.setLevel(logging.WARNING)
 fh.setFormatter(fmt)
-app.logger.addHandler(fh)
 
-app.config.from_object('config')
+# SMTP handler for logging
+mh = logging.handlers.SMTPHandler((app.config['MAIL_SERVER'], app.config['MAIL_PORT']),
+                         'no-reply@{0}'.format(app.config['MAIL_SERVER']), 
+                          app.config['ADMINS'], 'History Emergent Error',
+                          (app.config['MAIL_USERNAME'], app.config['MAIL_PASSWORD']),
+                          ())
+mh.setLevel(logging.WARNING)
+
+app.logger.addHandler(fh)
+app.logger.addHandler(mh)
+
+
 if app.config['DEBUG']:
     app.config['SQLALCHEMY_DATABASE_URI'] = app.config['DEV_DB_URL']
 else:

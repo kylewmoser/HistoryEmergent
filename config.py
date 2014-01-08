@@ -14,4 +14,11 @@ BUCKET_NAME = ''
 AWS_ACCESS_KEY = ''
 AWS_SECRET_KEY = ''
 
+MAIL_SERVER = 'smtp.gmail.com'
+MAIL_PORT = 587
+MAIL_USERNAME = ''
+MAIL_PASSWORD = ''
+
+ADMINS = []
+
 DEBUG = True
