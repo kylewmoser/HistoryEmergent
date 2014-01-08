@@ -1,4 +1,4 @@
-from dochost import app, db
+from historyemergent import app, db
 from flask.ext.script import Manager
 from flask.ext.migrate import Migrate, MigrateCommand
 
